@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:lidamas/core/routing/routes.dart';
 import 'package:lidamas/core/utils/extensions.dart';
+import 'package:lidamas/presetation/screen/auth/widget/password_field.dart';
 import 'package:lidamas/presetation/widgets/blue_button.dart';
 import 'package:lidamas/presetation/widgets/build_header.dart';
 
@@ -56,7 +57,7 @@ class _LoginState extends State<Login> {
                   children: [
                     _buildPhoneField(),
                     SizedBox(height: 20.h),
-                    _buildPasswordField(),
+                    PasswordField(focusNode: _focusNode,isHide: isHide,),
                     _buildForgotPasswordButton(),
                   ],
                 ),

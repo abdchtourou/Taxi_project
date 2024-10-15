@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lidamas/cubit/auth/forget_password_cubit.dart';
 import 'package:lidamas/presetation/screen/auth/forget_password.dart';
+import 'package:lidamas/presetation/screen/auth/rest_password.dart';
+import 'package:lidamas/presetation/screen/auth/sign_up.dart';
 import 'package:lidamas/presetation/screen/auth/verify_code_screen.dart';
+import 'package:lidamas/presetation/screen/homePage/home_page.dart';
 
 import 'core/routing/app_router.dart';
 import 'core/utils/app_them.dart';
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.themeData,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: appRouter.generateRoute,
-          // home: ResetPasswordVerification(),
+          home: HomePage(),
         );
       },
     );

@@ -4,8 +4,11 @@ class AppTheme {
   static ThemeData get themeData {
     return ThemeData(
       fontFamily: 'DIN Next LT Arabic',
-      primarySwatch: Colors.red,
       scaffoldBackgroundColor: const Color(0xFF0E151B),
+      appBarTheme: const AppBarTheme(
+
+        backgroundColor: Color(0xFF0F1921)
+      ),
 
       inputDecorationTheme: const InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
