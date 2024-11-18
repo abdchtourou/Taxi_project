@@ -97,8 +97,8 @@ class NewsCard extends StatelessWidget {
                         child: TextButton(
                           onPressed: () {},
                           style: TextButton.styleFrom(
-                            side: const BorderSide(
-                                color: Colors.white, width: 2),
+                            side:
+                                const BorderSide(color: Colors.white, width: 2),
                             padding: const EdgeInsets.only(bottom: 10),
                           ),
                           child: const Row(

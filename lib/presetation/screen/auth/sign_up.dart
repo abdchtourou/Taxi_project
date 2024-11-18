@@ -23,12 +23,12 @@ class SignUp extends StatelessWidget {
                 SizedBox(height: 120.h),
                 BuildHeader(title: 'إنشاء حساب'),
                 SizedBox(height: 40.h),
-                const CustomTextField(
+                 CustomTextField(
                   label: 'الاسم الكامل',
                   icon: Icons.person_outline,
                 ),
                 SizedBox(height: 16.h),
-                const CustomTextField(
+                 CustomTextField(
                   label: 'البريد الإلكتروني',
                   icon: Icons.email_outlined,
                 ),

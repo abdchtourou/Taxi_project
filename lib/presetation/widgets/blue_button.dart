@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BlueButton extends StatelessWidget {
   const BlueButton({super.key, required this.onPressed, required this.text});
@@ -16,7 +17,7 @@ class BlueButton extends StatelessWidget {
       ),
       child:  Text(
         text,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white,fontSize: 16.sp),
       ),
     );
   }

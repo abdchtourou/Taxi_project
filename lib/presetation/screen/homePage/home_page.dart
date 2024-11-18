@@ -9,6 +9,7 @@ import 'package:lidamas/presetation/widgets/build_header.dart';
 
 import '../../../cubit/home/home_page_cubit.dart';
 import '../../../cubit/home/home_page_state.dart';
+import '../booking_screen/booking_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,101 +18,65 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NavigationCubit(),
-      child: Scaffold(
-        appBar: _buildAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const PromoSection(),
-              const SizedBox(height: 30),
-              BuildHeader(
-                title: 'خدماتنا',
-                description:
-                    'تتميز لداماس بتقديمها خدمة التنقل الآمن والاستخدام الأسهل بشكل لائق وعصري.',
-              ),
-              const CustomServiceList(),
-              SizedBox(
-                width: double.infinity,
-                height: 180.h,
-                child: Image.asset(
-                  ImageAsset.airport,
-                ),
-              ),
-              const SizedBox(height: 70),
-              BuildHeader(
-                title: 'الأخبار',
-                description: 'تصفح آخر الاخبار من عندنا',
-              ),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: 294.h,
-                width: double.infinity,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 2,
-                  itemBuilder: (BuildContext context, int index) {
-                    String imageUrl = ImageAsset.people;
-                    String title = 'عنوان الخبر $index';
-                    String subtitle = 'عنوان فرعي للخبر $index';
+      child: BlocBuilder<NavigationCubit, NavigationState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: _buildAppBar(),
+            body: state.selectedIndex == 0
+                ? _buildHomeContent(context)
+                :  BookingScreen(),
+            bottomNavigationBar: _buildBottomNavigationBar(context, state),
+          );
+        },
+      ),
+    );
+  }
 
-                    return NewsCard(
-                      imageUrl: imageUrl,
-                      title: title,
-                      subtitle: subtitle,
-                    );
-                  },
-                ),
-              ),
-            ],
+  Widget _buildHomeContent(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const PromoSection(),
+          const SizedBox(height: 30),
+          BuildHeader(
+            title: 'خدماتنا',
+            description:
+            'تتميز لداماس بتقديمها خدمة التنقل الآمن والاستخدام الأسهل بشكل لائق وعصري.',
           ),
-        ),
-        bottomNavigationBar: BlocBuilder<NavigationCubit, NavigationState>(
-          builder: (context, state) {
-            return Directionality(
-              textDirection: TextDirection.rtl,
-              child: BottomNavigationBar(
-                backgroundColor: const Color(0xFF0E151B),
-                type: BottomNavigationBarType.fixed, // Ensure this is set
+          const CustomServiceList(),
+          SizedBox(
+            width: double.infinity,
+            height: 180.h,
+            child: Image.asset(
+              ImageAsset.airport,
+            ),
+          ),
+          const SizedBox(height: 70),
+          BuildHeader(
+            title: 'الأخبار',
+            description: 'تصفح آخر الاخبار من عندنا',
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 294.h,
+            width: double.infinity,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 20,
+              itemBuilder: (BuildContext context, int index) {
+                String imageUrl = ImageAsset.people;
+                String title = 'عنوان الخبر $index';
+                String subtitle = 'عنوان فرعي للخبر $index';
 
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.home,
-                    ),
-                    label: ' الصفحة الرئيسية',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.event_note,
-                    ),
-                    label: 'طلباتي',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.notifications_none,
-                    ),
-                    label: 'الإشعارات',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.airplanemode_active_outlined,
-                    ),
-                    label: 'حجز رحلة',
-                  ),
-
-                ],
-                selectedItemColor: Colors.blue,
-                unselectedItemColor: Colors.white,
-                currentIndex: state.selectedIndex,
-
-
-                onTap: (index) {
-                  context.read<NavigationCubit>().changeIndex(index);
-                },
-              ),
-            );
-          },
-        ),
+                return NewsCard(
+                  imageUrl: imageUrl,
+                  title: title,
+                  subtitle: subtitle,
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -147,6 +112,46 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildBottomNavigationBar(BuildContext context, NavigationState state) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          splashColor: Colors.transparent, // Remove the splash effect
+          highlightColor: Colors.transparent, // Remove the highlight effect
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: const Color(0xFF0E151B),
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: ' الصفحة الرئيسية',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.event_note),
+              label: 'طلباتي',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications_none),
+              label: 'الإشعارات',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.airplanemode_active_outlined),
+              label: 'حجز رحلة',
+            ),
+          ],
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.white,
+          currentIndex: state.selectedIndex,
+          onTap: (index) {
+            context.read<NavigationCubit>().changeIndex(index);
+          },
+        ),
+      ),
     );
   }
 }

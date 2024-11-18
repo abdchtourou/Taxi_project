@@ -13,4 +13,5 @@ class ImageAsset{
   static const String headPhone="${root}Vector (4).png";
   static const String airport="${root}airport.png";
   static const String people="${root}people.png";
+  static const String car="${root}economy.png";
 }
