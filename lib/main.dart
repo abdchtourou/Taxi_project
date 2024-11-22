@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lidamas/cubit/auth/forget_password_cubit.dart';
+import 'package:lidamas/cubit/booking/booking_cubit.dart';
 import 'package:lidamas/presetation/screen/auth/forget_password.dart';
 import 'package:lidamas/presetation/screen/auth/rest_password.dart';
 import 'package:lidamas/presetation/screen/auth/sign_up.dart';
@@ -43,7 +44,10 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.themeData,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: appRouter.generateRoute,
-          home: HomePage(),
+          home: BlocProvider(
+            create: (context) => BookingDetailsCubit(),
+            child: HomePage(),
+          ),
         );
       },
     );
