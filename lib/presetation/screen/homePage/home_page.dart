@@ -5,6 +5,7 @@ import 'package:lidamas/core/utils/image_asset.dart';
 import 'package:lidamas/presetation/screen/homePage/widget/custom_service_list.dart';
 import 'package:lidamas/presetation/screen/homePage/widget/news_card.dart';
 import 'package:lidamas/presetation/screen/homePage/widget/promo_section.dart';
+import 'package:lidamas/presetation/screen/oreders/orders_screen.dart';
 import 'package:lidamas/presetation/widgets/build_header.dart';
 
 import '../../../cubit/home/home_page_cubit.dart';
@@ -21,10 +22,16 @@ class HomePage extends StatelessWidget {
       child: BlocBuilder<NavigationCubit, NavigationState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: _buildAppBar(),
-            body: state.selectedIndex == 0
-                ? _buildHomeContent(context)
-                :  BookingScreen(),
+            appBar: _buildAppBar(context),
+            body: IndexedStack(
+              index: state.selectedIndex,
+              children: [
+                _buildHomeContent(context), // Home Page
+                BookingScreen(), // Booking Screen with its own Scaffold
+                OrdersScreen(), // Orders Page
+                // _buildNotificationsContent(context), // Notifications Page
+              ],
+            ),
             bottomNavigationBar: _buildBottomNavigationBar(context, state),
           );
         },
@@ -41,7 +48,7 @@ class HomePage extends StatelessWidget {
           BuildHeader(
             title: 'خدماتنا',
             description:
-            'تتميز لداماس بتقديمها خدمة التنقل الآمن والاستخدام الأسهل بشكل لائق وعصري.',
+                'تتميز لداماس بتقديمها خدمة التنقل الآمن والاستخدام الأسهل بشكل لائق وعصري.',
           ),
           const CustomServiceList(),
           SizedBox(
@@ -81,7 +88,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       toolbarHeight: 60.h,
       elevation: 2,
@@ -92,7 +99,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'الصفحة الرئيسية',
+            context.read<NavigationCubit>().currentPageTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16.sp,
@@ -115,7 +122,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context, NavigationState state) {
+  Widget _buildBottomNavigationBar(
+      BuildContext context, NavigationState state) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Theme(
@@ -132,16 +140,16 @@ class HomePage extends StatelessWidget {
               label: ' الصفحة الرئيسية',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.airplanemode_active_outlined),
+              label: 'حجز رحلة',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.event_note),
               label: 'طلباتي',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications_none),
               label: 'الإشعارات',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.airplanemode_active_outlined),
-              label: 'حجز رحلة',
             ),
           ],
           selectedItemColor: Colors.blue,

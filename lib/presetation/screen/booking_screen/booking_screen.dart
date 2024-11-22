@@ -1,5 +1,3 @@
-import 'dart:ui' as ui; // Import dart:ui and alias it
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lidamas/presetation/screen/booking_screen/widgets/booking_details_form.dart';
@@ -8,16 +6,16 @@ import 'package:lidamas/presetation/screen/booking_screen/widgets/trip_details_f
 import 'package:lidamas/presetation/widgets/blue_button.dart';
 import 'package:lidamas/presetation/widgets/build_header.dart';
 
-import '../../widgets/custom_text_field.dart';
-
 class BookingScreen extends StatelessWidget {
+  const BookingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Directionality(
-          textDirection: ui.TextDirection.rtl,
+          textDirection: TextDirection.rtl,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,5 +45,3 @@ class BookingScreen extends StatelessWidget {
     );
   }
 }
-
-
