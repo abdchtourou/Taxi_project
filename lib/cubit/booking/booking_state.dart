@@ -4,11 +4,13 @@ class BookingDetailsState {
   final String from;
   final String to;
   final bool isReturnChecked;
-  DateTime? selectedDate;
-  TimeOfDay? selectedTime;
+  String? selectedDate;
+  String? selectedTime;
+  final String type;
 
   BookingDetailsState(
-      {this.from = '',
+      {this.type='',
+      this.from = '',
       this.to = '',
       this.isReturnChecked = false,
       this.selectedDate,
@@ -17,12 +19,16 @@ class BookingDetailsState {
   BookingDetailsState copyWith(
       {String? from,
       String? to,
+      String? type,
       bool? isReturnChecked,
-      DateTime? selectedDate,
-      TimeOfDay? selectedTime}) {
+      String? selectedDate,
+      String? selectedTime
+
+      }) {
     return BookingDetailsState(
         from: from ?? this.from,
         to: to ?? this.to,
+        type: type ?? this.type,
         isReturnChecked: isReturnChecked ?? this.isReturnChecked,
         selectedDate: selectedDate ?? this.selectedDate,
         selectedTime: selectedTime ?? this.selectedTime);

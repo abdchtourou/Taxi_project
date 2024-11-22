@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lidamas/cubit/booking/booking_cubit.dart';
 import 'package:lidamas/presetation/screen/booking_screen/widgets/booking_details_form.dart';
 import 'package:lidamas/presetation/screen/booking_screen/widgets/car_card.dart';
 import 'package:lidamas/presetation/screen/booking_screen/widgets/trip_details_form.dart';
@@ -37,7 +39,12 @@ class BookingScreen extends StatelessWidget {
                 },
               ),
               const TripDetailsForm(),
-              BlueButton(onPressed: () {}, text: 'احجز')
+              BlueButton(
+                  onPressed: () {
+                    context.read<BookingDetailsCubit>().addBooking();
+                    print(context.read<BookingDetailsCubit>().bookingList);
+                  },
+                  text: 'احجز')
             ],
           ),
         ),

@@ -16,11 +16,14 @@ class BookingFormState extends StatelessWidget {
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
-            buildDropdownField('من'),
+            buildDropdownField('من', (value) {
+              cubit.setFrom(value!);
+            }),
             SizedBox(height: 20.h),
-            buildDropdownField('إلى'),
+            buildDropdownField('إلى', (value) {
+              cubit.setTo(value!);
+            }),
             const SizedBox(height: 24),
             const Text(
               'الوقت و التاريخ',
@@ -71,7 +74,9 @@ class BookingFormState extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            buildDropdownField('اختر نوع وثيقة الدخول'),
+            buildDropdownField('اختر نوع وثيقة الدخول', (value) {
+              cubit.setType(value!);
+            }),
             SizedBox(
               height: 40.h,
             ),
@@ -81,35 +86,34 @@ class BookingFormState extends StatelessWidget {
     );
   }
 
-  Widget buildDropdownField(String hint) {
+  Widget buildDropdownField(String hint, void Function(String?)? onChanged) {
     return SizedBox(
       height: 60.h,
       child: DropdownButtonFormField<String>(
-        decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          filled: true,
-          fillColor: const Color(0xFF0E151B),
-          hintText: hint,
-          hintStyle: TextStyle(color: Colors.grey[400]),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.white60),
-            borderRadius: BorderRadius.circular(8),
+          decoration: InputDecoration(
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            filled: true,
+            fillColor: const Color(0xFF0E151B),
+            hintText: hint,
+            hintStyle: TextStyle(color: Colors.grey[400]),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white60),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        icon: Icon(Icons.arrow_drop_down, color: Colors.grey[400]),
-        dropdownColor: const Color(0xFF1A1A1A),
-        items: const [
-          DropdownMenuItem(value: 'Option 1', child: Text('Option 1')),
-          DropdownMenuItem(value: 'Option 2', child: Text('Option 2')),
-          DropdownMenuItem(value: 'Option 3', child: Text('Option 3')),
-        ],
-        onChanged: (value) {},
-      ),
+          icon: Icon(Icons.arrow_drop_down, color: Colors.grey[400]),
+          dropdownColor: const Color(0xFF1A1A1A),
+          items: const [
+            DropdownMenuItem(value: 'Option 1', child: Text('Option 1')),
+            DropdownMenuItem(value: 'Option 2', child: Text('Option 2')),
+            DropdownMenuItem(value: 'Option 3', child: Text('Option 3')),
+          ],
+          onChanged: onChanged),
     );
   }
 
@@ -128,8 +132,9 @@ class BookingFormState extends StatelessWidget {
             initialTime: TimeOfDay.now(),
           );
           if (time != null) {
-            cubit.changeDate(date);
-            cubit.changeTime(time);
+            cubit
+                .changeDate(DateFormat.yMd().format(date));
+            cubit.changeTime(time.format(context));
           }
         }
       },
@@ -148,7 +153,7 @@ class BookingFormState extends StatelessWidget {
               cubit.state.selectedDate == null ||
                       cubit.state.selectedTime == null
                   ? 'حدد التاريخ و الوقت'
-                  : '${DateFormat.yMd().format(cubit.state.selectedDate!)}   ${cubit.state.selectedTime!.format(context)}',
+                  : '${cubit.state.selectedDate!}   ${cubit.state.selectedTime!}',
               style: TextStyle(color: Colors.white, fontSize: 15.sp),
             ),
           ],
