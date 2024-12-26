@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../cubit/booking/booking_cubit.dart';
 import '../../../widgets/custom_text_field.dart';
 import 'expandable_text_field.dart';
 
@@ -8,6 +10,8 @@ class TripDetailsForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<BookingDetailsCubit>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,18 +21,21 @@ class TripDetailsForm extends StatelessWidget {
           title: "عدد الحقائب",
           keyboardType: TextInputType.number,
           focusedBorderColors: Colors.white,
+          controller: cubit.bagsController,
         ),
         CustomTextField(
           label: 'موقع الانطلاق',
           icon: Icons.my_location,
           title: "موقع الانطلاق",
           focusedBorderColors: Colors.white,
+          controller: cubit.startLocationController,
         ),
         CustomTextField(
           label: 'الوجهة',
           icon: Icons.location_on_outlined,
           title: "الوجهة",
           focusedBorderColors: Colors.white,
+          controller: cubit.destinationController,
         ),
         CustomTextField(
           label: 'الاسم الكامل',
@@ -36,6 +43,7 @@ class TripDetailsForm extends StatelessWidget {
           title: "الاسم الكامل",
           keyboardType: TextInputType.text,
           focusedBorderColors: Colors.white,
+          controller: cubit.fullNameController,
         ),
         const ExpandableTextField(
           label: 'Enter Description',

@@ -35,7 +35,7 @@ class SignUp extends StatelessWidget {
                 SizedBox(height: 16.h),
                 _buildPhoneField(),
                 SizedBox(height: 320.h),
-                BlueButton(onPressed: () {}, text: 'text')
+                BlueButton(onPressed: () {}, text: 'التالي')
               ],
             ),
           ),

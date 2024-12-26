@@ -8,7 +8,7 @@ import '../../../core/routing/routes.dart';
 import '../../../cubit/on_boarding_cubit.dart';
 import '../../../data/datasource/static.dart';
 
-class Onboarding extends StatelessWidget {
+  class Onboarding extends StatelessWidget {
   const Onboarding({super.key});
 
   @override

@@ -31,9 +31,10 @@ class OrdersScreen extends StatelessWidget {
 
                 itemBuilder: (context, index) {
               return CardOrder(
-                count: index,
+                count: index + 1,
                 fromTo: cubit.bookingList[index].from,
                 date: cubit.bookingList[index].date,
+                cubit: cubit,
               );
             }))
         ],

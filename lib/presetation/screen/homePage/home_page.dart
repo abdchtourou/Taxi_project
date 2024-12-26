@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lidamas/core/utils/image_asset.dart';
+import 'package:lidamas/cubit/booking/booking_cubit.dart';
 import 'package:lidamas/presetation/screen/homePage/widget/custom_service_list.dart';
 import 'package:lidamas/presetation/screen/homePage/widget/news_card.dart';
 import 'package:lidamas/presetation/screen/homePage/widget/promo_section.dart';
@@ -17,8 +18,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NavigationCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+        create: (context) => NavigationCubit(),),
+        BlocProvider(
+        create: (context) => BookingDetailsCubit(),)
+      ],
       child: BlocBuilder<NavigationCubit, NavigationState>(
         builder: (context, state) {
           return Scaffold(

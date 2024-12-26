@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
       this.title,
       this.keyboardType,
         this.focusedBorderColors,
+         this.controller,
       });
 
   final String label;
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
   final String? title;
   TextInputType? keyboardType;
   Color ? focusedBorderColors;
+  TextEditingController?   controller;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
         TextField(
+          controller:controller ,
           style:  TextStyle(color: Colors.white),
           decoration: InputDecoration(
             labelText: label,

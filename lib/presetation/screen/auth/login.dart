@@ -64,7 +64,9 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(height: 280.h),
-            BlueButton(text: 'تسجيل الدخول',onPressed: (){},),
+            BlueButton(text: 'تسجيل الدخول',onPressed: (){
+              context.pushNamed(Routes.homePage);
+            },),
             _buildSignUpText(),
           ],
         ),
@@ -170,6 +172,7 @@ class _LoginState extends State<Login> {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
+              context.pushNamed(Routes.signUp);
                 print('Create Account tapped');
               },
           ),

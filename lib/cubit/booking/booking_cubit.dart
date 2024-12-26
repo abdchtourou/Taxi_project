@@ -12,6 +12,12 @@ class BookingDetailsCubit extends Cubit<BookingDetailsState> {
   TextEditingController destination = TextEditingController();
   TextEditingController fullName = TextEditingController();
   TextEditingController notes = TextEditingController();
+  //
+  final TextEditingController bagsController = TextEditingController();
+  final TextEditingController startLocationController = TextEditingController();
+  final TextEditingController destinationController = TextEditingController();
+  final TextEditingController fullNameController = TextEditingController();
+
 
   void setFrom(String value) {
     emit(state.copyWith(from: value));
