@@ -44,18 +44,20 @@ class BookingDetailsCubit extends Cubit<BookingDetailsState> {
   }
 
   List<BookingModel> bookingList = [];
+  BookingModel? bookingModel;
 
   void addBooking() {
     print("${state.selectedDate} ${state.selectedTime}//////////////////////////////");
-    bookingList.add(BookingModel(
+     bookingModel=BookingModel(
         from: state.from,
         to: state.to,
         date: "${state.selectedDate}  ${state.selectedTime}",
         isReturened: state.isReturnChecked,
         type: state.type,
-        numOfPage: numberOfPage.text,
-        startingPoint: startingPoint.text,
-        destination: destination.text,
-        fullName: fullName.text));
+        numOfPage: bagsController.text,
+        startingPoint: startLocationController.text,
+        destination: destinationController.text,
+        fullName: fullName.text);
+    bookingList.add(bookingModel!);
   }
 }

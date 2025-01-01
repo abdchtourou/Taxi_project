@@ -10,6 +10,7 @@ import 'package:lidamas/presetation/screen/auth/rest_password.dart';
 import 'package:lidamas/presetation/screen/auth/sign_up.dart';
 import 'package:lidamas/presetation/screen/auth/verify_code_screen.dart';
 import 'package:lidamas/presetation/screen/booking_screen/booking_screen.dart';
+import 'package:lidamas/presetation/screen/fAQ_screen.dart';
 import 'package:lidamas/presetation/screen/homePage/home_page.dart';
 import 'package:lidamas/presetation/screen/onBoarding/onBoarding.dart';
 
@@ -51,7 +52,9 @@ class MyApp extends StatelessWidget {
             //   create: (context) => OnBoardingCubit(),
             //   child: const Onboarding(),
             // ),
+          home: FAQScreen(),
         );
+
       },
     );
   }

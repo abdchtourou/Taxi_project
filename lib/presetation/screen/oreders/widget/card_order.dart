@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lidamas/core/utils/extensions.dart';
+import 'package:lidamas/cubit/booking/booking_cubit.dart';
 
 import '../../../../core/routing/routes.dart';
 import 'custom_row.dart';
@@ -11,7 +12,7 @@ class CardOrder extends StatelessWidget {
   final count;
   final fromTo;
   final date;
-  final cubit;
+  final BookingDetailsCubit cubit;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class CardOrder extends StatelessWidget {
               Center(
                 child: OutlinedButton(
                   onPressed: () {
-                    context.pushNamed(Routes.details,arguments: cubit);
+                    context.pushNamed(Routes.details,arguments: cubit.bookingModel);
 
                   },
                   style: OutlinedButton.styleFrom(

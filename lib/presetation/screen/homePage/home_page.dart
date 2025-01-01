@@ -28,13 +28,14 @@ class HomePage extends StatelessWidget {
       child: BlocBuilder<NavigationCubit, NavigationState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: _buildAppBar(context),
+            drawer:CustomDrawer(),
+            appBar: buildAppBar(context),
             body: IndexedStack(
               index: state.selectedIndex,
               children: [
                 _buildHomeContent(context), // Home Page
-                BookingScreen(), // Booking Screen with its own Scaffold
-                OrdersScreen(), // Orders Page
+                BookingScreen(),
+                OrdersScreen(),
                 // _buildNotificationsContent(context), // Notifications Page
               ],
             ),
@@ -94,39 +95,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      toolbarHeight: 60.h,
-      elevation: 2,
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-            context.read<NavigationCubit>().currentPageTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(width: 15.w),
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(ImageAsset.logo),
-                ),
-              ),
-              SizedBox(width: 10.w),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
 
   Widget _buildBottomNavigationBar(
       BuildContext context, NavigationState state) {
@@ -166,6 +134,120 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+AppBar buildAppBar(BuildContext context) {
+  return AppBar(
+    iconTheme: const IconThemeData(
+      color: Colors.white, // Change this to your desired color
+    ),
+    toolbarHeight: 60.h,
+    elevation: 2,
+    actions: [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              context.read<NavigationCubit>().currentPageTitle,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(width: 15.w),
+            CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(ImageAsset.logo),
+              ),
+            ),
+            SizedBox(width: 10.w),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Container(
+        color: Color(0xFF0E151B),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+          const  DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color(0xFF0E151B),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.grey,
+                    child: Icon(Icons.person, size: 40, color: Colors.white),
+                  ),
+                  SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "اسم المستخدم",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "example@email.com",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            _buildDrawerItem(Icons.settings, "الإعدادات",(){}),
+            _buildDrawerItem(Icons.help_outline, "الأسئلة العامة",(){}),
+            _buildDrawerItem(Icons.phone, "تواصل معنا",(){}),
+            _buildDrawerItem(Icons.info_outline, "حول التطبيق",(){}),
+            _buildDrawerItem(Icons.question_mark, "المساعدة والدعم",(){}),
+            _buildDrawerItem(Icons.logout, "تسجيل الخروج",(){}),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem(IconData icon, String title,void Function()? onTap) {
+    return Column(
+      children: [
+        ListTile(
+          trailing: Icon(icon, color: Colors.white),
+          title: Text(
+            title,
+            style: const TextStyle(color: Colors.white, fontSize: 16,),
+            textAlign: TextAlign.end,
+          ),
+          onTap:onTap,
+        ),
+        Divider(thickness: 0.5,color: Colors.grey,)
+      ],
     );
   }
 }

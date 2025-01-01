@@ -8,6 +8,9 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: Color(0xFF0F1921),
       ),
+      iconTheme: const IconThemeData(
+        color: Colors.blue, // Replace with your desired color
+      ),
       inputDecorationTheme: const InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white, width: 2.0),

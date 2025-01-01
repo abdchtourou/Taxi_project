@@ -43,7 +43,7 @@ class TripDetailsForm extends StatelessWidget {
           title: "الاسم الكامل",
           keyboardType: TextInputType.text,
           focusedBorderColors: Colors.white,
-          controller: cubit.fullNameController,
+          controller: cubit.fullName,
         ),
         const ExpandableTextField(
           label: 'Enter Description',

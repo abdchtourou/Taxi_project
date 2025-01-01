@@ -4,6 +4,7 @@ import 'package:lidamas/core/routing/routes.dart';
 import 'package:lidamas/cubit/auth/forget_password_cubit.dart';
 import 'package:lidamas/cubit/booking/booking_cubit.dart';
 import 'package:lidamas/cubit/on_boarding_cubit.dart';
+import 'package:lidamas/data/model/booking_model.dart';
 import 'package:lidamas/presetation/screen/auth/forget_password.dart';
 import 'package:lidamas/presetation/screen/auth/login.dart';
 import 'package:lidamas/presetation/screen/auth/verify_code_screen.dart';
@@ -42,9 +43,11 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => const ResetPasswordVerification());
         case Routes.details:
-          final cubit = settings.arguments as BookingDetailsCubit;
+          final BookingModel bookingModel = settings.arguments as BookingModel;
+          print('///////////////////////');
+        print(bookingModel);
         return MaterialPageRoute(
-            builder: (context) =>  Details(cubit: cubit,));
+            builder: (context) =>  Details(bookingModel: bookingModel,));
 
     }
   }

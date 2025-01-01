@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lidamas/data/model/booking_model.dart';
 
 import '../../../core/utils/image_asset.dart';
 import '../../../cubit/booking/booking_cubit.dart';
@@ -8,8 +9,8 @@ import '../../../cubit/home/home_page_cubit.dart';
 import '../../widgets/build_header.dart';
 
 class Details extends StatelessWidget {
-  Details({super.key, required this.cubit});
-  final BookingDetailsCubit cubit;
+  Details({super.key, required this.bookingModel});
+  final BookingModel bookingModel;
 
 
 
@@ -17,16 +18,16 @@ class Details extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, String> data = {
 
-    'الرحلة': 'من {cubit.startLocationController.text} إلى {cubit.destinationController.text}',
-    'موعد الرحلة': '12/9/2024 08:30 AM',
+    'الرحلة': ' ${bookingModel.to}  الى ${bookingModel.from}  من  ',
+    'موعد الرحلة': bookingModel.date,
     'حالة الطلب': 'studentInfo',
-    'ذهاب و عودة': 'نعم',
+    'ذهاب و عودة':bookingModel.isReturened? 'نعم': "لا",
     'وثيقة الدخول': 'جنسية',
     'نوع السيارة': 'سيارة اقتصادية     1,025,000 ل.س',
-    ' عدد الحقائب': '2',
-    ' موقع الانطلاق': 'مطار دمشق',
-    'الوجهة': 'مطار بيروت',
-    'الاسم الكامل': 'اسم المسافر',
+    ' عدد الحقائب': bookingModel.numOfPage,
+    ' موقع الانطلاق': bookingModel.startingPoint,
+    'الوجهة': bookingModel.destination,
+    'الاسم الكامل': bookingModel.fullName,
     'رقم الهاتف': '+963996352662',
     ' اسم السائق': 'اسم السائق',
   };
@@ -59,7 +60,8 @@ class Details extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                     children: data.entries.map(
                             (entry) {
-                          return CustomDataRow(
+                              print(entry.value);
+                      return CustomDataRow(
                             label: entry.key,
                             value: entry.value,
                           );
